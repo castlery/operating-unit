@@ -3,7 +3,7 @@
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <openerp>
-
+<data>
     <record id="view_quotation_tree" model="ir.ui.view">
         <field name="name">sale.order.tree</field>
         <field name="model">sale.order</field>
@@ -50,5 +50,5 @@
             </field>
         </field>
     </record>
-
+</data>
 </openerp>

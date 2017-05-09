@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-     <data>
-
+    <data>
         <record id="accounting_report_view" model="ir.ui.view">
             <field name="name">Accounting Report</field>
             <field name="model">accounting.report</field>
             <field name="inherit_id" ref="account.accounting_report_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//notebook/page[@name='comparison']" position="after">
+                <xpath expr="//notebook/page[@string='Comparison']" position="after">
                     <page string="Operating Units"
                           name="operating_units"
                           widget="selection"
@@ -18,6 +17,5 @@
                 </xpath>
             </field>
         </record>
-
     </data>
 </openerp>

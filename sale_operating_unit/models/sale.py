@@ -11,10 +11,17 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     @api.model
+    def _default_section_id(self):
+        """ Gives default section by checking if present in the context """
+        section_id = self._resolve_section_id_from_context() or False
+        if not section_id:
+            section_id = self.env.user.default_section_id or False
+        return section_id
+
+    @api.model
     def _default_operating_unit(self):
-        if self._defaults['team_id'](self):
-            return self.env['crm.case.section'].browse(self._defaults['team_id'](
-                self)).operating_unit_id
+        if self._default_section_id():
+            return self.env['crm.case.section'].browse(self._defaults['section_id']()).operating_unit_id
         else:
             return self.env.user.default_operating_unit_id
 

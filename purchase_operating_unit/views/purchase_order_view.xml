@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
-
+<data>
     <record id="purchase_order_tree" model="ir.ui.view">
         <field name="name">purchase_order_tree</field>
         <field name="model">purchase.order</field>
@@ -46,5 +46,5 @@
             </field>
         </field>
     </record>
-
+</data>
 </openerp>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp noupdate="1">
-
+<openerp>
+<data noupdate="1">
     <!-- Shelf 2 stock location -->
     <record id="stock.stock_location_14" model="stock.location">
         <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
@@ -51,5 +51,5 @@
         <field name="company_id" ref="base.main_company"/>
         <field name="operating_unit_id" ref="operating_unit.b2c_operating_unit"/>
     </record>
-
+</data>
 </openerp>
