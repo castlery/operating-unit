@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="1">
+<openerp noupdate="1">
 
     <!-- Shelf 2 stock location -->
     <record id="stock.stock_location_14" model="stock.location">
@@ -52,4 +52,4 @@
         <field name="operating_unit_id" ref="operating_unit.b2c_operating_unit"/>
     </record>
 
-</odoo>
+</openerp>

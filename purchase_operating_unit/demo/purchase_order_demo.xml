@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
 
     <record id="purchase.purchase_order_1" model="purchase.order">
         <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
@@ -29,4 +29,4 @@
         <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
     </record>
 
-</odoo>
+</openerp>

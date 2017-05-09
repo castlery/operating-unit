@@ -16,7 +16,6 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
         self.account_model = self.env['account.account']
         self.journal_model = self.env['account.journal']
         self.product_model = self.env['product.product']
-        self.payment_model = self.env['account.payment']
         self.register_payments_model = self.env['account.register.payments']
 
         # company
