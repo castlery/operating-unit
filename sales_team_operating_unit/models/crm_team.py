@@ -8,9 +8,9 @@ from openerp import api, fields, models
 class CRMTeam(models.Model):
     _inherit = 'crm.case.section'
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        default="_default_operating_unit")
-
     @api.model
     def _default_operating_unit(self):
         return self.env.user.default_operating_unit_id
+
+    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
+                                        default=_default_operating_unit)

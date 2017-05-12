@@ -14,7 +14,7 @@
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Purchase Management",
-    "depends": ["purchase"],
+    "depends": ["purchase", "operating_unit"],
     "license": "LGPL-3",
     "data": [
         "security/purchase_security.xml",
