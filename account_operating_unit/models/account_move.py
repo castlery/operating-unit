@@ -21,17 +21,17 @@ class AccountMoveLine(models.Model):
             move = self.env['account.move'].browse(vals['move_id'])
             if move.operating_unit_id:
                 vals['operating_unit_id'] = move.operating_unit_id.id
-        _super = super(AccountMoveLine, self)
-        return _super.create(vals, apply_taxes=apply_taxes)
+        return super(AccountMoveLine, self).create(vals)
 
     @api.model
-    def _query_get(self, domain=None):
-        if domain is None:
-            domain = []
+    def _query_get(self, obj='l'):
+        cr, uid, context = self.env.args
+        query = super(AccountMoveLine, self)._query_get(obj=obj)
+        query_params = {}
         if self._context.get('operating_unit_ids', False):
-            domain.append(('operating_unit_id', 'in',
-                           self._context.get('operating_unit_ids')))
-        return super(AccountMoveLine, self)._query_get(domain)
+            query_params['operating_unit_ids'] = tuple(self._context.get('operating_unit_ids'))
+            query += ' AND ' + obj + '.operating_unit_ids IN %(operating_unit_ids)s'
+        return cr.mogrify(query, query_params)
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
@@ -59,9 +59,17 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     operating_unit_id = fields.Many2one('operating.unit',
-                                        'Default operating unit',
+                                        'Operating unit',
                                         help="This operating unit will "
                                              "be defaulted in the move lines.")
+
+    @api.model
+    def create(self, vals):
+        if 'operating_unit_id' not in vals:
+            ctx = self._context
+            if 'operating_unit_id' in ctx:
+                vals['operating_unit_id'] = ctx.get('operating_unit_id', False)
+        return super(AccountMove, self).create(vals)
 
     @api.multi
     def _prepare_inter_ou_balancing_move_line(self, move, ou_id,
@@ -137,12 +145,12 @@ class AccountMove(models.Model):
         return super(AccountMove, self).assert_balanced()
 
     @api.multi
-    @api.constrains('line_ids')
+    @api.constrains('line_id')
     def _check_ou(self):
         for move in self:
             if not move.company_id.ou_is_self_balanced:
                 continue
-            for line in move.line_ids:
+            for line in move.line_id:
                 if not line.operating_unit_id:
                     raise Warning(_('Configuration error!\nThe operating\
                     unit must be completed for each line if the operating\

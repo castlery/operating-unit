@@ -2,14 +2,15 @@
 # © 2015 Eficent Business and IT Consulting Services S.L.
 # © 2015 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import fields, models
+from openerp import api, fields, models
 
 
 class CRMTeam(models.Model):
-
     _inherit = 'crm.case.section'
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid))
+                                        default="_default_operating_unit")
+
+    @api.model
+    def _default_operating_unit(self):
+        return self.env.user.default_operating_unit_id

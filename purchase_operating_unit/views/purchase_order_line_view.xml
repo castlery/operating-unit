@@ -17,7 +17,7 @@
         <field name="model">purchase.order.line</field>
         <field name="inherit_id" ref="purchase.purchase_order_line_form2" />
         <field name="arch" type="xml">
-            <field name="price_unit" position="after">
+            <field name="company_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>

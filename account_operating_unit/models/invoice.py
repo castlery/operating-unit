@@ -11,21 +11,26 @@ class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid))
+                                        default=lambda self: self.env['res.users'].operating_unit_default_get(self._uid))
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
-        move_lines = super(AccountInvoice,
-                           self).finalize_invoice_move_lines(move_lines)
+        move_lines = super(AccountInvoice, self).finalize_invoice_move_lines(move_lines)
         new_move_lines = []
         for line_tuple in move_lines:
             if self.operating_unit_id:
-                line_tuple[2]['operating_unit_id'] = \
-                    self.operating_unit_id.id
+                line_tuple[2]['operating_unit_id'] = self.operating_unit_id.id
             new_move_lines.append(line_tuple)
         return new_move_lines
+
+    @api.multi
+    def action_move_create(self):
+        ctx = dict(self._context)
+        if self.operating_unit_id and 'operating_unit_id' not in ctx:
+            ctx['operating_unit_id'] = self.operating_unit_id.id
+            return super(AccountInvoice, self).with_context(ctx).action_move_create()
+        else:
+            return super(AccountInvoice, self).action_move_create()
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')

@@ -4,7 +4,7 @@
 
 {
     "name": "Sales Team Operating Unit",
-    "version": "9.0.1.0.0",
+    "version": "8.0.1.0.0",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",

@@ -84,7 +84,6 @@ class TestPurchaseOperatingUnit(test_purchase_order.TestPurchaseOrder):
             lines.append((0, 0, line_values))
         purchase = self.PurchaseOrder.sudo(user_id).create({
             'operating_unit_id': self.ou1.id,
-            'requesting_operating_unit_id': self.ou1.id,
             'partner_id': self.partner1.id,
             'order_line': lines,
             'company_id': self.company1.id,

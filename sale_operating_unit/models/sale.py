@@ -41,11 +41,9 @@ class SaleOrder(models.Model):
                                         ' the Sales Order and in the Operating'
                                         ' Unit must be the same.'))
 
-    @api.multi
-    def _prepare_invoice(self):
-        self.ensure_one()
-        invoice_vals = super(SaleOrder, self)._prepare_invoice()
-        invoice_vals['operating_unit_id'] = self.operating_unit_id.id
+    def _prepare_invoice(self, cr, uid, order, lines, context=None):
+        invoice_vals = super(SaleOrder, self)._prepare_invoice(cr, uid, order, lines, context=context)
+        invoice_vals['operating_unit_id'] = order.operating_unit_id.id
         return invoice_vals
 
 
@@ -54,4 +52,4 @@ class SaleOrderLine(models.Model):
 
     operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
                                         string='Operating Unit',
-                                        readonly=True)
+                                        readonly=True, store=True)

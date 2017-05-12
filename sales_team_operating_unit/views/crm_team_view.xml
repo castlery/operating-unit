@@ -21,12 +21,12 @@
             <field name="model">crm.case.section</field>
             <field name="inherit_id" ref="sales_team.crm_case_section_view_form"/>
             <field name="arch" type="xml">
-                <grou name="left" position="inside">
+                <group name="left" position="after">
                     <group string="Operating Unit" name="group_operating_unit"
                            groups="operating_unit.group_multi_operating_unit">
-                        <field name="operating_unit_id" domain = "[('company_id','=', company_id)]" options="{'no_create': True}"/>
+                        <field name="operating_unit_id" options="{'no_create': True}"/>
                     </group>
-                </page>
+                </group>
             </field>
         </record>
 

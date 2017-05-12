@@ -5,7 +5,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Operating Unit in Sales",
-    "version": "9.0.1.0.0",
+    "version": "8.0.1.0.0",
     "summary": "An operating unit (OU) is an organizational entity part of a "
                "company",
     "author": "Eficent Business and IT Consulting Services S.L., "
